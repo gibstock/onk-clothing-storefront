@@ -14,6 +14,7 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
   }
@@ -33,16 +34,24 @@ const SignUpForm = () => {
       )
       
       await createUserDocumentFromAuth(user, {displayName})
+
+
       resetFormFields()
       // confirm success
 
-      console.log({user})
+      console.log("after auth", {user})
 
     }catch (err) {
-      if(err.code == 'auth/email-already-in-use') {
-        alert('cannot crete user, email already in use')
+      switch(err.code) {
+        case 'auth/email-alredy-in-use':
+          alert('cannot crete user, email already in use');
+          break;
+        case 'auth/weak-password':
+          alert('Password must be at least 6 characters');
+          break;
+        default:
+          console.log(err)
       }
-      console.error('user creation encountered an error', err)
     }
   }
   
