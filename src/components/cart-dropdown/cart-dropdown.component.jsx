@@ -7,11 +7,12 @@ import { CartContext } from '../../contexts/cart.context'
 
 const CartDropdown = () => {
 
-  const {cartItems} = useContext(CartContext)
+  const {cartItems, isCartOpen, setIsCartOpen} = useContext(CartContext)
   
   const navigate = useNavigate()
 
   const clickHandler = () => {
+    setIsCartOpen(!isCartOpen)
     navigate('/checkout')
   }
 
@@ -20,7 +21,7 @@ const CartDropdown = () => {
       <CartItems>
         {
           cartItems.length ? (
-            cartItems.map((cartItem) => <CartItem cartItem={cartItem} />)
+            cartItems.map((cartItem) => <CartItem cartItem={cartItem} key={cartItem.id} />)
             ) : (
             <EmptyMessage>Your cart is empty</EmptyMessage>
           )

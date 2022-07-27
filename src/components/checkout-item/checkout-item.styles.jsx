@@ -14,22 +14,21 @@ export const ImageContainer = styled.div`
   width: 23%;
   padding-right: 15px;
 
-`
-export const Image = styled.img`
-  width: 100%;
-  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
 `
-const CommonWidth = `
+export const BaseSpan = styled.span`
   width: 23%;
 
 `
-export const Name = styled.span(CommonWidth)
-export const Price = styled.span(CommonWidth)
-export const Quantity = styled.span`
-  width: 23%;
+export const Quantity = styled(BaseSpan)`
   display: flex;
 `
+export const Name = styled(BaseSpan)
+
 export const Arrow = styled.div`
   cursor: pointer;
   &:hover {
